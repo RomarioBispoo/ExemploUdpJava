@@ -1,21 +1,33 @@
-package br.ufs.dcomp.ExemploUdpJava; 
-
+package br.ufs.dcomp.ExemploUdpJava;
+import java.util.*;
 import java.net.*;
 
-/*
-    Alguns comandos úteis:
-            cd Pasta do projeto. e.g cd ExemploUdpjava
-            mvn compile 
-            java -cp target/classes/ "um espaco em branco" digitar tab continuamente :D"
-*/
-
-public class AppUDP2 {
+public class AppUDP1 {
 
     public static void main(String[] args) throws SocketException {
         try{
+            
+            System.out.print("[ Alocando porta UDP      ..................  ");
+    	    DatagramSocket socket = new DatagramSocket(10000);
+            System.out.println("[OK] ]"); 
+            System.out.println("insira a msg")
+            Scanner sc = new Scanner (System.in);
+            String msg = sc.nextLine();
+            //String msg = "Olá!!!";
+            
+            byte[] msg_buf = msg.getBytes();
+            int msg_size = msg_buf.length;
+            InetAddress destination_address = InetAddress.getLocalHost();
+            int destination_port = 20000; 
 
+            System.out.print("[ Montando datagrama UDP  ..................  ");
+            DatagramPacket pack = new DatagramPacket(msg_buf, msg_size, destination_address, destination_port);
+            System.out.println("[OK] ]");
             
-            
+            System.out.print("[ Enviando datagrama UDP  ..................  ");
+            socket.send(pack);
+            System.out.println("[OK] ]");
+           
             System.out.print("[ Alocando porta UDP                  ..................  ");
     	    DatagramSocket socket = new DatagramSocket(20000);
             System.out.println("[OK] ]");
@@ -35,10 +47,12 @@ public class AppUDP2 {
             System.out.println("  Mensagem:             "+received_msg);
             System.out.println("  Endereço de origem:   "+origin_address.getHostAddress());
             System.out.println("  Porta de origem:      "+origin_port);
+            
         
-        } catch (Exception e){
+        } 
+        catch (Exception e){
             System.out.println(e.getMessage());
         }    
         
     }
-}
+   }

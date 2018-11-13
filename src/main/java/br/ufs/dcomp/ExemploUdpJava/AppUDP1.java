@@ -1,5 +1,5 @@
 package br.ufs.dcomp.ExemploUdpJava;
-
+import java.util.*;
 import java.net.*;
 
 public class AppUDP1 {
@@ -9,8 +9,10 @@ public class AppUDP1 {
             System.out.print("[ Alocando porta UDP      ..................  ");
     	    DatagramSocket socket = new DatagramSocket(10000);
             System.out.println("[OK] ]");
-            
-            String msg = "Olá!!!";
+            System.out.println("insira a msg")
+            Scanner sc = new Scanner (System.in);
+            String msg = sc.nextLine();
+            //String msg = "Olá!!!";
             
             byte[] msg_buf = msg.getBytes();
             int msg_size = msg_buf.length;
